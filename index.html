@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فهد الحمامى</title>
+    <!-- تضمين Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            background: linear-gradient(-45deg, #dadada75, #dddddd), url(img/main.webp);
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 100vh;
+        }
+
+        .slider-container {
+            text-align: center;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        #slider-text {
+            animation: slide 5s linear infinite;
+        }
+
+        @keyframes slide {
+            0%, 100% { opacity: 0; }
+            25%, 75% { opacity: 1; }
+        }
+
+        /* تخصيص الزرار العائم */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+            background-color: #25d366;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            padding: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* تخصيص الزرار لتغيير اللغة */
+        .language-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+        .my-float{
+            margin-top:16px;
+        }
+        .float{
+            position:fixed;
+            width:60px;
+            height:60px;
+            bottom:40px;
+            right:40px;
+            background-color:#25d366;
+            color:#FFF;
+            border-radius:50px;
+            text-align:center;
+            font-size:30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index:100;
+        }
+    </style>
+</head>
+<body>
+    <!-- زرار تغيير اللغة -->
+    <button class="btn btn-primary language-btn" id="change-language"></button>
+
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center" style="height: 100vh;">
+            <div class="col-md-6">
+                <div class="slider-container">
+                    <h1 id="slider-text"></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- زرار الواتساب العائم -->
+    <a href="https://wa.me/00971582802514" class="float" target="_blank"><i class="fa fa-whatsapp my-float"></i></a>
+
+    <!-- تضمين Bootstrap JS وjQuery -->
+    <script src="js/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        const sliderText = document.getElementById('slider-text');
+        const textArArray = [" احصل على اقامتك اليوم مع شركة فهد الحمامي الشركة مرخصة من قبل  حكومة دبي رقم الرخصة  (1227907)", "احذر الشركات الوهمية والتي قد توقعك بمشاكل قانونية", "حكومة دبي توفر الكثير من الطرق للحصول على اقامة دبي","تواصل الان عبر واتساب واحصل على المعلومات التي تحتاجها"];
+        const textEnArray = ["Get your residency today with Fahd Al Hamami Company. The company is licensed by the Dubai government, license number (1227907).","Beware of fake companies that may get you into legal trouble","The Dubai government provides many ways to obtain Dubai residency","Contact now via WhatsApp and get the information you need"];
+        var textArray=[];
+        let currentIndex = 0;
+        var currentLang = localStorage.getItem('lang')||'ar';
+
+        if(currentLang == 'ar')
+        {
+            $('#change-language').text('EN');
+            textArray = textArArray;
+        }else{
+            $('#change-language').text('ع');
+            textArray = textEnArray;
+        }
+
+        console.log(currentLang);
+        function changeSliderText() {
+            sliderText.textContent = textArray[currentIndex];
+            currentIndex = (currentIndex + 1) % textArray.length;
+        }
+
+        // تغيير النص بمؤقت كل 3 ثواني
+        setInterval(changeSliderText, 3000);
+
+        $('#change-language').click(function()
+        {
+            if(currentLang == 'ar')
+            {
+             currentLang = 'en';  
+             localStorage.setItem('lang','en') 
+             $('#change-language').text('ع');
+             textArray = textEnArray;
+
+            }else{
+            currentLang = 'ar';  
+             localStorage.setItem('lang','ar') 
+             $('#change-language').text('EN');
+             textArray = textArArray;
+            }
+        })
+
+    </script>
+</body>
+</html>
